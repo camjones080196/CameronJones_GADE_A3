@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Opendoor : MonoBehaviour {
+public class Opendoor2 : MonoBehaviour
+{
 
     Animator anim;
     BoxCollider2D door;
-    
+
 
     void Start()
     {
-        anim = GameObject.FindGameObjectWithTag("Door1").GetComponent<Animator>();
-        door = GameObject.FindGameObjectWithTag("Door1").GetComponent<BoxCollider2D>();
+        anim = GameObject.FindGameObjectWithTag("Door2").GetComponent<Animator>();
+        door = GameObject.FindGameObjectWithTag("Door2").GetComponent<BoxCollider2D>();
     }
 
-    
-    void Update () {
-		
-	}
+
+    void Update()
+    {
+
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
-    { 
+    {
         if (collision.gameObject.tag == "Player" && this.gameObject.GetComponent<DialogueEngine>().Interacted == true)
         {
             Debug.Log("Opening");

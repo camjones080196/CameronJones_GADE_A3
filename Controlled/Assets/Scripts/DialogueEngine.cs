@@ -18,10 +18,23 @@ public class DialogueEngine : MonoBehaviour {
     protected GameObject player;
     protected bool talking = false;
     protected bool changeID = false;
+    private bool interacted = false;
     protected int newID;
 
+    public bool Interacted
+    {
+        get
+        {
+            return interacted;
+        }
 
-	void Start ()
+        set
+        {
+            interacted = value;
+        }
+    }
+
+    void Start ()
     {
         LoadDBDialogue();
         
@@ -34,6 +47,7 @@ public class DialogueEngine : MonoBehaviour {
         {
             DialoguePanel.hideOptions();
             NextMessage();
+            Interacted = true;
         }
 
         if (Time.timeScale == 0)

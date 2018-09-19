@@ -9,6 +9,7 @@ public class DialogueWithTrigger : DialogueEngine
         {
             DialoguePanel.hideOptions();
             NextMessage();
+            Interacted = true;
         }
 
         if (Time.timeScale == 0)
