@@ -26,7 +26,6 @@ public class SheilaMovement : AIMovement
     {
         anim = this.gameObject.GetComponent<Animator>();
         currentX = transform.position.x;
-        this.startMovement();
     }
 
     public override void getTargets()

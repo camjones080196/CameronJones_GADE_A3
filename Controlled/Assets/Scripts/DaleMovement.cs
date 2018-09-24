@@ -5,11 +5,27 @@ using UnityEngine;
 public class DaleMovement : AIMovement
 {
     private Animator anim;
+    private bool forward = true;
+    private float currentX;
+    float movement;
+
+    public bool Forward
+    {
+        get
+        {
+            return forward;
+        }
+
+        set
+        {
+            forward = value;
+        }
+    }
 
     public void Start()
     {
         anim = this.gameObject.GetComponent<Animator>();
-        this.startMovement();
+        currentX = transform.position.x;
     }
 
     public override void getTargets()
@@ -42,14 +58,29 @@ public class DaleMovement : AIMovement
                     resetPoints();
                 }
                 anim.SetBool("Move", false);
+                currentX = transform.position.x;
                 yield return new WaitForSeconds(waitTime);
             }
             else
             {
                 anim.SetBool("Move", true);
                 this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, speed * Time.deltaTime);
+                FlipPlayer();
             }
 
+        }
+    }
+
+    void FlipPlayer()
+    {
+        movement = this.transform.position.x;
+
+        if ((movement > currentX && !Forward) || (movement < currentX && Forward))
+        {
+            Vector3 playerScale = transform.localScale;
+            playerScale.x = -playerScale.x;
+            transform.localScale = playerScale;
+            Forward = !Forward;
         }
     }
 

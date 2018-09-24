@@ -16,5 +16,8 @@ public class EnableComputer : DialogueTrigger {
 
         GameObject.FindGameObjectWithTag("Computer").GetComponent<DialogueWithTrigger>().enabled = true;
         GameObject.FindGameObjectWithTag("Trigger2").GetComponent<DialogueEngine>().ChangeDialogueToID(id, true);
+        GameObject.FindGameObjectWithTag("Mother").GetComponent<MotherMovement>().startMovement();
+        GameObject.FindGameObjectWithTag("Sheila").GetComponent<SheilaMovement>().startMovement();
+        GameObject.FindGameObjectWithTag("Dale").GetComponent<DaleMovement>().startMovement();
     }
 }
