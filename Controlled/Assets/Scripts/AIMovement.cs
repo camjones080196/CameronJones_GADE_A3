@@ -2,14 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class AIMovement : MonoBehaviour {
 
-    public bool move = false;
     public float speed;
+    public GameObject[] targets;
+    public Vector3 newPos;
+    public float startWaitTime;
+    public float waitTime;
 
-    public Queue<Vector2> points = new Queue<Vector2>();
+    public CustomQueue<Vector2> points = new CustomQueue<Vector2>();
 
-    public abstract void startMovement();
+    public abstract void getTargets();
+    public abstract IEnumerator moveAI();
+
+    public void startMovement()
+    {
+        getTargets();
+        StartCoroutine(moveAI());
+    }
     
         
     
