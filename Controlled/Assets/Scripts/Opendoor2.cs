@@ -25,22 +25,28 @@ public class Opendoor2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && this.gameObject.GetComponent<DialogueEngine>().Interacted == true)
         {
+            
             Debug.Log("Opening");
             anim.SetBool("Closed", false);
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().openDoor();
             anim.SetBool("Opened", true);
             door.enabled = false;
+            
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.name == "Player")
+        if (collision.name == "Player"  && this.gameObject.GetComponent<DialogueEngine>().Interacted == true)
         {
             Debug.Log("Closing");
+           
             anim.SetBool("Opened", false);
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().closeDoor();
             anim.SetBool("Closed", true);
             door.enabled = true;
             this.gameObject.GetComponent<DialogueEngine>().Interacted = false;
+            
         }
     }
 }

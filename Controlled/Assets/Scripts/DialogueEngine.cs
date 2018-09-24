@@ -20,6 +20,7 @@ public class DialogueEngine : MonoBehaviour {
     protected bool changeID = false;
     private bool interacted = false;
     protected int newID;
+    private bool enabled = false;
 
     public bool Interacted
     {
@@ -34,6 +35,19 @@ public class DialogueEngine : MonoBehaviour {
         }
     }
 
+    public bool Enabled
+    {
+        get
+        {
+            return enabled;
+        }
+
+        set
+        {
+            enabled = value;
+        }
+    }
+
     void Start ()
     {
         LoadDBDialogue();
@@ -45,6 +59,7 @@ public class DialogueEngine : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.E) && enter && !talking && Time.timeScale != 0.0f)
         {
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().normalClick();
             DialoguePanel.hideOptions();
             NextMessage();
             Interacted = true;
@@ -61,10 +76,14 @@ public class DialogueEngine : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            counter = 0;
-            player = other.gameObject;
-            enter = true;
-            DialoguePanel.showOptions();
+            if (enabled || this.name == "Mother"|| this.name == "DialogueTrigger" || this.name == "DialogueTrigger2")
+            {
+                GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().prompt();
+                counter = 0;
+                player = other.gameObject;
+                enter = true;
+                DialoguePanel.showOptions();
+            }
         }
 
     }
@@ -86,7 +105,15 @@ public class DialogueEngine : MonoBehaviour {
 
     public virtual void NextMessage()
     {
-        
+        if (this.gameObject.name != "Computer")
+        {
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().normalClick();
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().computerClick();
+        }
+
         if (!enter)
         {
             return;
@@ -119,6 +146,15 @@ public class DialogueEngine : MonoBehaviour {
 
     public virtual void GoToNextMessage(int messageNumber)
     {
+        if (this.gameObject.name != "Computer")
+        {
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().normalClick();
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().computerClick();
+        }
+
         if (!enter)
         {
             return;
