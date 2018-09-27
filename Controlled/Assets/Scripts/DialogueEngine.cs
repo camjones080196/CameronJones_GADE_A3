@@ -76,14 +76,12 @@ public class DialogueEngine : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            if (enabled || this.name == "Mother"|| this.name == "DialogueTrigger" || this.name == "DialogueTrigger2")
-            {
-                GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().prompt();
+             GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundScript>().prompt();
                 counter = 0;
                 player = other.gameObject;
                 enter = true;
                 DialoguePanel.showOptions();
-            }
+            
         }
 
     }

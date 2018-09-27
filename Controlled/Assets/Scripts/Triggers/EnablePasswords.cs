@@ -16,10 +16,8 @@ public class EnablePasswords : DialogueTrigger
         }
         triggered = true;
 
-        GameObject.FindGameObjectWithTag("Bedside").GetComponent<DialogueEngine>().Enabled = true;
-        GameObject.FindGameObjectWithTag("Poster").GetComponent<DialogueEngine>().Enabled = true;
-        GameObject.FindGameObjectWithTag("Bedside").GetComponent<DialogueWithTrigger>().enabled = true;
-        GameObject.FindGameObjectWithTag("Poster").GetComponent<DialogueWithTrigger>().enabled = true;
+        GameObject.FindGameObjectWithTag("Bedside").GetComponent<DialogueEngine>().ChangeDialogueToID(5, true);
+        GameObject.FindGameObjectWithTag("Poster").GetComponent<DialogueEngine>().ChangeDialogueToID(7, true);
         GameObject.FindGameObjectWithTag("Trigger1").GetComponent<DialogueEngine>().ChangeDialogueToID(id, true);
         GameObject.FindGameObjectWithTag("Trigger2").GetComponent<DialogueEngine>().ChangeDialogueToID(id2, true);
     }
